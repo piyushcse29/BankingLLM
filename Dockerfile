@@ -1,8 +1,9 @@
 #!/bin/bash
-FROM python:3.9.18
+FROM --platform=linux/amd64 python:3.9.18 as build
 
 ARG GRADIO_SERVER_PORT=7860
 ENV GRADIO_SERVER_PORT=${GRADIO_SERVER_PORT}
+ENV HF_TOKEN=""
 
 # Set the working directory inside the container
 WORKDIR /app
@@ -19,4 +20,4 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
 
-CMD ["python", "src/web/app2.py"]
+CMD ["python", "src/web/app.py"]

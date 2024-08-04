@@ -4,6 +4,11 @@ import sys
 from llama_index.llms.huggingface import HuggingFaceLLM
 from llama_index.core import Settings, PromptTemplate, StorageContext, load_index_from_storage
 import torch
+from huggingface_hub import login
+import os
+
+#Login to HF
+login(token=os.environ["HF_TOKEN"])
 
 # Set up logging
 logging.basicConfig(stream=sys.stdout, level=logging.INFO)
@@ -11,7 +16,7 @@ logger = logging.getLogger()
 logger.addHandler(logging.StreamHandler(stream=sys.stdout))
 
 # Log message to indicate the start of the application
-logger.info("Starting Chat with the Juvo AI application")
+logger.info("Starting Chat with the BankingLLM")
 
 Settings, PromptTemplate, StorageContext, load_index_from_storage
 
@@ -21,7 +26,7 @@ logger = logging.getLogger()
 logger.addHandler(logging.StreamHandler(stream=sys.stdout))
 
 # Log message to indicate the start of the application
-logger.info("Starting Chat with the Juvo AI application")
+logger.info("Starting Chat with the BankingLLM")
 
 # Define system prompt
 SYSTEM_PROMPT = """
@@ -30,8 +35,8 @@ You are an AI assistant that answers questions in a friendly manner, based on th
 - Generate only the requested output, don't include any other language before or after the requested output.
 - Generate professional language.
 - Never generate offensive or foul language.
-- Replace TSB bank name with Juvo Bank
-- Treat the user as a customer of Juvo Bank
+- Replace TSB bank name with Dummy Bank
+- Treat the user as a customer of Dummy Bank
 - Always provide a friendly response ans emphasize the customer's needs
 """
 
@@ -49,8 +54,9 @@ llm = HuggingFaceLLM(
     model_name="mistralai/Mistral-7B-Instruct-v0.2",
     device_map="auto",
     tokenizer_kwargs={"max_length": 2048},
-    model_kwargs={"torch_dtype": torch.float16}  # Uncomment this if using CUDA to reduce memory usage
+    model_kwargs={"torch_dtype": torch.float16}
 )
+
 logger.info("Initialized HuggingFaceLLM")
 
 # Configure settings

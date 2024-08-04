@@ -10,7 +10,7 @@
 
 2. Navigate to the project directory:
     ```
-    cd prototype
+    cd BankingLLM
     ```
 
 3. Install the required Python packages:
@@ -20,14 +20,14 @@
 
 ## Running the Docker File
 
-1. Build the Docker image. Replace `<image-name>` with the name you want to give to your Docker image:
+1. Build the Docker image. 
     ```
-    docker build -t <image-name> .
+    docker build -t bankingllm .
     ```
 
-2. Run the Docker container. Replace `<image-name>` with the name of your Docker image:
+2. Run the Docker container.
     ```
-    docker run -p 7860:7860 <image-name>
+    docker run -p 7860:7860 bankingllm
     ```
 
 The application should now be running at `http://localhost:7860`.
